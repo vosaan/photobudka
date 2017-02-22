@@ -6,13 +6,16 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\User */
 /* @var $form yii\widgets\ActiveForm */
+
+($model->username === 'admin') ? $isDisableField = true : $isDisableField = false;
+
 ?>
 
 <div class="user-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'disabled' => $isDisableField]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 

@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <?=Yii::$app->session->getFlash('wrong')?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -23,7 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'username',
 
-            ['class' => 'yii\grid\ActionColumn', 'template'=>'{update} {delete}'],
+            [
+                'content' => function ($model) {
+                    if ($model->username !== 'admin') {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->id])
+                            . Html::a('<span class="glyphicon glyphicon-trash"></span>', ['delete', 'id' => $model->id], ['data-method'=> 'post']);
+                    } else {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['update', 'id' => $model->id]);
+                    }
+                }
+            ]
         ],
     ]); ?>
 </div>
