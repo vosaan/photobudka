@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\admin\models\User;
+use app\modules\admin\models\UserForm;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -100,7 +101,7 @@ class UserController extends Controller
             Yii::$app->session->setFlash('wrong', '<p class="alert-danger login-wrong">Admin is a default user. He`s can`t be deleted</p>');
             return $this->redirect(['index']);
         } else {
-            $model->delete($id);
+            $model->delete();
             return $this->redirect(['index']);
         }
     }
@@ -119,5 +120,27 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest){
+            $this->redirect('/admin/user');
+        }
+
+        $model = new UserForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
+            $model->login();
+            $this->redirect('/admin/user');
+        } else {
+            return $this->render('login', compact('model'));
+        }
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        $this->redirect('/admin');
     }
 }

@@ -3,6 +3,7 @@
 namespace app\modules\admin\models;
 
 use Yii;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "user".
@@ -11,7 +12,7 @@ use Yii;
  * @property string $username
  * @property string $password
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const SCENARIO_CREATE = 'create';
     const SCENARIO_UPDATE = 'update';
@@ -68,6 +69,10 @@ class User extends \yii\db\ActiveRecord
         return self::findOne(['username' => $username]);
     }
 
+    public function checkUserPassword($password){
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
     public function validateUsernameUnique()
     {
         $user = self::findByUsername($this->username);
@@ -75,5 +80,31 @@ class User extends \yii\db\ActiveRecord
         if ($user){
             $this->addError('username', 'User with the same username already exist!');
         }
+    }
+
+    /******************************************************************************************************************/
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+
+    }
+
+    public function getAuthKey()
+    {
+
+    }
+
+    public function validateAuthKey($authKey)
+    {
+
     }
 }
