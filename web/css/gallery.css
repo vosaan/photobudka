@@ -1,0 +1,54 @@
+.thumbs-container{
+    /*background-color: #aa0000;*/
+}
+
+.thumbs-container ul{
+    padding: 0;
+}
+
+.thumbs-container > ul > li{
+    list-style-type: none;
+    display: inline-block;
+}
+
+.thumbs-container .thumbnail-wrapper{
+    width: 130px;
+    background-color: #eee;
+    margin: 10px 10px;
+}
+
+.thumbs-container .thumbnail-container{
+    height: 130px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.thumbs-container .thumbnail-container a{
+    display: block;
+}
+
+
+.thumbs-container .thumbnail-wrapper .del-check{
+    margin-left: 10px;
+}
+
+.thumbs-container .thumbnail-wrapper .delete-label{
+    display: inline-block;
+    margin: -2px 0 0 10px;
+}
+/*.thumbs-container .thumbnail-container .delete-button{*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*width: 15px;*/
+    /*height: 15px;*/
+    /*background-color: #aa0000;*/
+    /*cursor: pointer;*/
+/*}*/
+
+.thumbs-container .del-wrapper{
+    background-color: #a94442;
+}
