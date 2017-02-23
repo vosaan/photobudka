@@ -29,7 +29,7 @@ class Module extends \yii\base\Module
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'generate-slug'],
                         'roles' => ['@'],
                         'controllers' => ['admin/album']
                     ]
