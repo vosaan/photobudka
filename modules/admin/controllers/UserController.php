@@ -125,14 +125,14 @@ class UserController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest){
-            $this->redirect('/admin/user');
+            $this->redirect('/admin/album');
         }
 
         $model = new UserForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()){
             $model->login();
-            $this->redirect('/admin/user');
+            $this->redirect('/admin/album');
         } else {
             return $this->render('login', compact('model'));
         }

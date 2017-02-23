@@ -29,8 +29,8 @@ AppAsset::register($this);
 
     if (!Yii::$app->user->isGuest){
         NavBar::begin([
-            'brandLabel' => 'My Company',
-            'brandUrl' => Yii::$app->homeUrl,
+            'brandLabel' => 'Home',
+            'brandUrl' => '/admin/album',
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
             ],
@@ -38,9 +38,9 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => 'Albums', 'url' => ['/admin/album']],
+                ['label' => 'Users', 'url' => ['/admin/user']],
+                ['label' => 'Front of site', 'url' => [Yii::$app->homeUrl]],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
                 ) : (

@@ -105,6 +105,7 @@ class AlbumController extends Controller
         if ($modelAlbum->load(Yii::$app->request->post()) && $modelImage->load(Yii::$app->request->post())) {
 
             if($modelAlbum->validate()){
+                $modelAlbum->edit_date = date('Y-m-d H:i:s');
                 $modelAlbum->save(false);
             }
 
