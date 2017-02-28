@@ -97,8 +97,11 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if ($model->username === 'admin' || $model->id == 1){
-            Yii::$app->session->setFlash('wrong', '<p class="alert-danger login-wrong">Admin is a default user. He`s can`t be deleted</p>');
+        if ($model->username == 'admin' || $model->id == 1){
+            Yii::$app->session->setFlash('wrong', '<div class="alert alert-danger">Admin is a default user. He`s can`t be deleted</div>');
+            return $this->redirect(['index']);
+        } elseif (Yii::$app->user->identity->id == $id){
+            Yii::$app->session->setFlash('wrong', '<div class="alert alert-danger">The user can not delete himself!</div>');
             return $this->redirect(['index']);
         } else {
             $model->delete();
