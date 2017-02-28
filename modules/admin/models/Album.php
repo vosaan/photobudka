@@ -11,6 +11,7 @@ use Yii;
  * @property string $title
  * @property string $slug
  * @property string $password
+ * @property string $password_hash
  * @property string $description
  * @property string $create_date
  * @property string $edit_date
@@ -57,5 +58,10 @@ class Album extends \yii\db\ActiveRecord
             'is_active' => 'Is Active',
             'is_private' => 'Is Private',
         ];
+    }
+
+    public function getSecurePassword()
+    {
+        return Yii::$app->getSecurity()->generatePasswordHash($this->password);
     }
 }

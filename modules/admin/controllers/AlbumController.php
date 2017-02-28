@@ -74,6 +74,7 @@ class AlbumController extends Controller
 
         if ($modelAlbum->load(Yii::$app->request->post()) && $modelImage->load(Yii::$app->request->post())) {
             if($modelAlbum->validate()){
+                $modelAlbum->password_hash = $modelAlbum->getSecurePassword();
                 $modelAlbum->save(false);
             }
 
@@ -105,6 +106,7 @@ class AlbumController extends Controller
         if ($modelAlbum->load(Yii::$app->request->post()) && $modelImage->load(Yii::$app->request->post())) {
 
             if($modelAlbum->validate()){
+                $modelAlbum->password_hash = $modelAlbum->getSecurePassword();
                 $modelAlbum->edit_date = date('Y-m-d H:i:s');
                 $modelAlbum->save(false);
             }
